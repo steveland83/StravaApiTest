@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Strava API Test</h1>
+    <p class="lead">Strava Api is a pain in the fuckin balls.</p>
+    
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>COOOONect Some shit</h2>
+        
+        @Html.ActionLink("action", "AuthoriseStrava", "Home")
+        <br /><br />
+        @Html.ActionLink("action", "TestAuthorisation", "Home")
+        <br /><br />
+        @Html.Raw(ViewBag.Authorised)
+    </div>
+</div>
