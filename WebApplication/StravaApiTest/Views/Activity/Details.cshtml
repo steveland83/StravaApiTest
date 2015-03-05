@@ -1,0 +1,300 @@
+﻿@model com.strava.api.Activities.ActivitySummary
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Activity Details</h2>
+
+<div>
+    <p>
+        @Html.ActionLink("Back to List", "Index", new { athleteId = Model.Athlete.Id })
+    </p>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExternalId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExternalId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Distance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Distance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MovingTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MovingTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElapsedTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElapsedTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ElevationGain)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ElevationGain)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasKudoed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasKudoed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageHeartrate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageHeartrate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxHeartrate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxHeartrate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Truncated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Truncated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GearId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GearId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageSpeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageSpeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxSpeed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxSpeed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageCadence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageCadence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AverageTemperature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AverageTemperature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AveragePower)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AveragePower)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Kilojoules)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kilojoules)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsTrainer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsTrainer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsCommute)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsCommute)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsManual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsManual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPrivate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPrivate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFlagged)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFlagged)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AchievementCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AchievementCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.KudosCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KudosCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommentCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommentCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AthleteCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AthleteCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhotoCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDateLocal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDateLocal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeZone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeZone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WeightedAverageWatts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WeightedAverageWatts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HasPowerMeter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HasPowerMeter)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", new { athleteId = Model.Athlete.Id })
+</p>

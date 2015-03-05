@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Strava Authorisation";
+}
+
+<script type="text/javascript">
+        $(document).ready(function() {
+            $("#accordion").accordion();
+        });
+</script>
+
+<h2>Strava Authorisation</h2>
+
+@{
+    if(!ViewBag.Success)
+    {
+        <text>
+            <h5>Aww heck. That didnt work.<br /></h5>
+            <div style="border:2px dotted orange; margin:15px; padding:15px;">
+                @ViewBag.ErrorDescription
+            </div>
+        </text>        
+    }
+    else
+    {
+        <text>
+            <h5>Sweet... Everything looks legit, your super secret permission key is<br /></h5>
+            <div style="border:1px dotted darkgreen; margin:15px; padding:15px;">
+                @ViewBag.StravaKey
+            </div>
+        </text>
+    }
+    
+}
+
+<div id="accordion">
+    <h3>
+        View full response
+    </h3>
+    <div>
+        @ViewBag.FullResponse
+    </div>
+</div>

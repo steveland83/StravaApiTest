@@ -1,0 +1,228 @@
+﻿@model StravaApiTest.Models.User
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>User Details</h2>
+
+<p>
+    @Html.ActionLink("Sync Now", "SyncAthleteDetails", new { accessToken = Model.StravaAccessToken }) |
+    @Html.ActionLink("Back", "Index")
+</p>
+<br />
+<div>
+    <h4>Sync Info</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AthleteId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AthleteId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StravaAccessToken)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StravaAccessToken)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastSyncDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastSyncDate)
+        </dd>
+    </dl>
+
+    <br />
+    <h4>Strava Athlete Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.ResourceState)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.ResourceState)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.ProfileMedium)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.ProfileMedium)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.Profile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.Profile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.State)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.Country)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.Country)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.Sex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.Sex)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.Friend)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.Friend)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.Follower)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.Follower)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.IsPremium)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.IsPremium)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.CreatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.CreatedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.UpdatedAt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.UpdatedAt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.ApproveFollowers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.ApproveFollowers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.FollowerCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.FollowerCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.FriendCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.FriendCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.MutualFriendCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.MutualFriendCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.DatePreference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.DatePreference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.MeasurementPreference)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.MeasurementPreference)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Athlete.Ftp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Athlete.Ftp)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sync Now", "SyncAthleteDetails", new { accessToken = Model.StravaAccessToken }) |
+    @Html.ActionLink("Back", "Index")
+</p>

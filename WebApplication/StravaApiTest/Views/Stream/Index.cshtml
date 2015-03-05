@@ -1,0 +1,44 @@
+﻿@model IEnumerable<StravaApiTest.Models.StreamWrapper>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SeriesType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OriginalSize)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resolution)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SeriesType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OriginalSize)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Resolution)
+        </td>
+        <td>
+            @Html.ActionLink("Open Data Stream", "Details", new { /*id=item.PrimaryKey */ }, new { target = "_blank" })
+        </td>
+    </tr>
+}
+
+</table>

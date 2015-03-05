@@ -3,6 +3,7 @@ using com.strava.api.Clients;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,34 +13,6 @@ namespace StravaApiTest.Controllers
     {
         public ActionResult Index()
         {
-            if (Request.QueryString.HasKeys() && !String.IsNullOrEmpty(Request.QueryString["code"]))
-            {
-                StaticAuthentication staticAuth = new StaticAuthentication(Request.QueryString["code"]);
-                StravaClient steviekins = new StravaClient(staticAuth);
-
-                var athlete = steviekins.Athletes.GetAthlete();
-
-                ViewBag.Authorised = "Authorised!!!   " + string.Format("{0} {1}", athlete.FirstName, athlete.LastName);; ;
-            }
-            else
-            {
-                ViewBag.Authorised = "Not Authorised";
-            }
-
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -50,16 +23,14 @@ namespace StravaApiTest.Controllers
             return steviekins.Activities.GetTotalActivityCount().ToString();
         }
 
-        public void AuthoriseStrava()
+        public void GetAuthWebServiceCode()
         {
-            WebAuthentication auth = new WebAuthentication();
-            auth.GetTokenAsync("4832", "8a5369c4685ac2380321b9d1e0faa001d37d8502", Scope.Full, 50689);
-
-            auth.AccessTokenReceived +=
-                delegate
-                {
-                    string shittyfuckballs = "yeahBaby";
-                };
+            string clientId = "4832";
+            string postbackUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Permission";
+            
+            var webAddr = String.Format("https://www.strava.com/oauth/authorize?client_id={0}&response_type=code&redirect_uri={1}", clientId, postbackUrl);
+            
+            Response.Redirect(webAddr);                        
         }
     }
 }
