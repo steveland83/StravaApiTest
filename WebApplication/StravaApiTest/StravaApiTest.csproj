@@ -43,9 +43,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="com.strava.api, Version=3.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Users\Steve\Desktop\stravadotnet-master\com.strava.api\bin\Debug\com.strava.api.dll</HintPath>
+      <HintPath>..\Assemblies\com.strava.api.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -178,13 +184,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201503042204389_InitialCreate.cs" />
-    <Compile Include="Migrations\201503042204389_InitialCreate.Designer.cs">
-      <DependentUpon>201503042204389_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201503082249322_InitialCreate.cs" />
+    <Compile Include="Migrations\201503082249322_InitialCreate.Designer.cs">
+      <DependentUpon>201503082249322_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\StreamWrapper.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ActivityEntity.cs" />
+    <Compile Include="Models\StreamEntity.cs" />
+    <Compile Include="Models\UserEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -237,6 +244,7 @@
     <Content Include="Views\Activity\Index.cshtml" />
     <Content Include="Views\Stream\Details.cshtml" />
     <Content Include="Views\Stream\Index.cshtml" />
+    <Content Include="Views\Stream\AllStreams.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -249,8 +257,8 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201503042204389_InitialCreate.resx">
-      <DependentUpon>201503042204389_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201503082249322_InitialCreate.resx">
+      <DependentUpon>201503082249322_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

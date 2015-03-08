@@ -25,11 +25,8 @@ namespace StravaApiTest.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var user = db.Users.FirstOrDefault(p => p.Id == athleteId);
-
-            var auth = new com.strava.api.Authentication.StaticAuthentication(user.StravaAccessToken);
-            var activityClient = new ActivityClient(auth);
-            return View(activityClient.GetActivitiesBefore(DateTime.Now));
+            var activities = db.Activities.Where(p => p.AthleteId == athleteId).OrderBy(p=>p.ActivityDate);
+            return View(activities);
         }
 
         public void OpenDistanceStream(int? athleteId, int? activityId)
@@ -47,22 +44,21 @@ namespace StravaApiTest.Controllers
             Response.Redirect(string.Format("~/Stream/Details?athleteId={0}&activityId={1}&streamType={2}", athleteId, activityId, StreamType.Velocity_Smooth.ToString()));
         }
 
+        public void OpenAllStreams(int athleteId, int activityId)
+        {
+            Response.Redirect(string.Format("~/Stream/AllStreams?athleteId={0}&activityId={1}", athleteId, activityId));
+        }
         
 
         // GET: Activity/Details/5
-        public ActionResult Details(int athleteId, string activityId)
+        public ActionResult Details(long activityId)
         {
-            if (String.IsNullOrEmpty(activityId) || athleteId == 0)
+            if (activityId==0)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var user = db.Users.FirstOrDefault(p => p.Id == athleteId);
-
-            var auth = new com.strava.api.Authentication.StaticAuthentication(user.StravaAccessToken);
-            var activityClient = new ActivityClient(auth);
-
-            return View(activityClient.GetActivity(activityId, false));
+            var activity = db.Activities.Where(p => p.Id == activityId).FirstOrDefault();
+            return View(activity);
         }
 
         protected override void Dispose(bool disposing)

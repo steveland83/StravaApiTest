@@ -1,4 +1,4 @@
-﻿@model com.strava.api.Activities.ActivitySummary
+﻿@model StravaApiTest.Models.ActivityEntity
 
 @{
     ViewBag.Title = "Details";
@@ -9,7 +9,7 @@
 
 <div>
     <p>
-        @Html.ActionLink("Back to List", "Index", new { athleteId = Model.Athlete.Id })
+        @Html.ActionLink("Back to List", "Index", new { athleteId = Model.AthleteId })
     </p>
     <hr />
     <dl class="dl-horizontal">
@@ -296,5 +296,5 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index", new { athleteId = Model.Athlete.Id })
+    @Html.ActionLink("Back to List", "Index", new { athleteId = Model.AthleteId })
 </p>

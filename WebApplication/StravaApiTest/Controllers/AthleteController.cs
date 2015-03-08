@@ -24,7 +24,7 @@ namespace StravaApiTest.Controllers
         // GET: Details
         public ActionResult Details(string accessToken)
         {
-            var user = db.Users.Where(p => p.StravaAccessToken == accessToken).FirstOrDefault();
+            var user = db.Users.Where(p => p.AccessToken == accessToken).FirstOrDefault();
             return View(user);
         }
 

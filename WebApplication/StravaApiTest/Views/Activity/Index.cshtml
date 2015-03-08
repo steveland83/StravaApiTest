@@ -1,4 +1,4 @@
-﻿@model IEnumerable<com.strava.api.Activities.ActivitySummary>
+﻿@model IEnumerable<StravaApiTest.Models.ActivityEntity>
 
 @{
     ViewBag.Title = "Index";
@@ -51,10 +51,8 @@
             @Html.DisplayFor(modelItem => item.StartDateLocal)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { athleteId = item.Athlete.Id, activityId = item.Id }) |
-            @Html.ActionLink("Distance Stream", "OpenDistanceStream", new { athleteId = item.Athlete.Id, activityId = item.Id }, new { target = "_blank" }) |
-            @Html.ActionLink("HeartRate Stream", "OpenHeartRateStream", new { athleteId = item.Athlete.Id, activityId = item.Id }, new { target = "_blank" }) |
-            @Html.ActionLink("Velocity Stream", "OpenVelocityStream", new { athleteId = item.Athlete.Id, activityId = item.Id }, new { target = "_blank" })
+            @Html.ActionLink("Details", "Details", new { activityId = item.Id }) | 
+            @Html.ActionLink("View Stream Data", "OpenAllStreams", new { athleteId = item.AthleteId, activityId = item.Id }, new { target = "_blank" })            
         </td>
     </tr>
 }

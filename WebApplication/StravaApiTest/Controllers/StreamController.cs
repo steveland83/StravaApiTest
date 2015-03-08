@@ -24,28 +24,25 @@ namespace StravaApiTest.Controllers
         //}
 
         // GET: Stream/Details/5
-        public ActionResult Details(int? athleteId, int? activityId, StreamType streamType)
+        public ActionResult Details(long? athleteId, long? activityId, StreamType streamType)
         {
-            if (athleteId == null || activityId == null || streamType == null)
+            if (athleteId == null || activityId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var user = db.Users.FirstOrDefault(p => p.Id == athleteId);
-            var auth = new com.strava.api.Authentication.StaticAuthentication(user.StravaAccessToken);
-            var streamClient = new StreamClient(auth);
+            var stream = db.ActivityStreams.Where(p=>p.ActivityId == activityId.Value && p.StreamType == streamType).FirstOrDefault();
 
-            var streamList = streamClient.GetActivityStream(activityId.Value.ToString(), streamType);
+            if (stream == null)
+                stream = new StreamEntity(athleteId.Value, activityId.Value) { SeriesType = string.Format("No {0} stream found for this activity", streamType.ToString()) };
 
-            if(streamType == StreamType.Distance)
-            {
-                return View(streamList[0]);
-            }
-            if(streamType != StreamType.Distance && streamList.Count==2)
-            {
-                return View(streamList[1]);
-            }
+            return View(stream);
+        }
 
-            return View(new ActivityStream() { SeriesType = string.Format("No {0} stream found for this activity", streamType.ToString()), Data = new List<object>() });
+        public ActionResult AllStreams(long athleteId, long activityId)
+        {
+            var streams = db.ActivityStreams.Where(p => p.ActivityId == activityId).ToList();
+            
+            return View(streams);
         }
 
         protected override void Dispose(bool disposing)

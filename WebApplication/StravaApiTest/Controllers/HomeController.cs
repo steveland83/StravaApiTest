@@ -16,13 +16,6 @@ namespace StravaApiTest.Controllers
             return View();
         }
 
-        public string TestAuthorisation(){
-            StaticAuthentication staticAuth = new StaticAuthentication("d8a4b85f2511530f93b8574ed64697557f85eeea");
-            StravaClient steviekins = new StravaClient(staticAuth);
-
-            return steviekins.Activities.GetTotalActivityCount().ToString();
-        }
-
         public void GetAuthWebServiceCode()
         {
             string clientId = "4832";

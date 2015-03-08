@@ -1,0 +1,33 @@
+﻿@model List<StravaApiTest.Models.StreamEntity>
+@{
+    ViewBag.Title = "All Streams";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Stream Data</h2>
+
+<div>
+    <hr /><br />
+    <table class="table-bordered">
+        <tr>
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                <th>
+                    @Model[i].StreamType.ToString()
+                </th>
+            }
+        </tr>
+
+        @for (int i = 0; i < Model[0].Data.Data.Count(); i++)
+        {
+            <tr>
+                @for (int j = 0; j < Model.Count(); j++)
+                {
+                    <td>
+                        @Model[j].Data.Data[i].ToString()
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>

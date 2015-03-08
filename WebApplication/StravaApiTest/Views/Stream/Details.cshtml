@@ -1,5 +1,4 @@
-﻿@model com.strava.api.Streams.ActivityStream
-
+﻿@model StravaApiTest.Models.StreamEntity
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -38,7 +37,7 @@
     <hr />
     <h4>All Data Points:</h4>
     <hr />
-    @foreach (var dataPoint in Model.Data) { 
+    @foreach (var dataPoint in Model.Data.Data) { 
         var firendlyData = dataPoint.ToString();
         @Html.DisplayFor(x => firendlyData)<br />
     }
