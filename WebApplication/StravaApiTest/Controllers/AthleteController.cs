@@ -35,6 +35,14 @@ namespace StravaApiTest.Controllers
             Response.Redirect(string.Format("~/Athlete/Details?accessToken={0}", accessToken));
         }
 
+        public void ClearAthleteActivities(string accessToken)
+        {
+            var user = db.Users.Where(p => p.AccessToken == accessToken).FirstOrDefault();
+            //System.Threading.Tasks.Task.Factory.StartNew(() => Engine.SyncManager.DeleteAthleteActivityData(user));
+            Engine.SyncManager.DeleteAthleteActivityData(user);
+            Response.Redirect(string.Format("~/Athlete/Details?accessToken={0}", accessToken));
+        }
+
         public void ViewActivities(string athleteId)
         {
             Response.Redirect(string.Format("~/Activity/Index?athleteId={0}", athleteId));

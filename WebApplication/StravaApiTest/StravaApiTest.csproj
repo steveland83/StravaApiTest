@@ -188,6 +188,10 @@
     <Compile Include="Migrations\201503082249322_InitialCreate.Designer.cs">
       <DependentUpon>201503082249322_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503122324080_activity_map_cascade.cs" />
+    <Compile Include="Migrations\201503122324080_activity_map_cascade.Designer.cs">
+      <DependentUpon>201503122324080_activity_map_cascade.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ActivityEntity.cs" />
     <Compile Include="Models\StreamEntity.cs" />
@@ -259,6 +263,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201503082249322_InitialCreate.resx">
       <DependentUpon>201503082249322_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503122324080_activity_map_cascade.resx">
+      <DependentUpon>201503122324080_activity_map_cascade.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
