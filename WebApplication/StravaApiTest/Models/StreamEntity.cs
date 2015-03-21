@@ -39,7 +39,6 @@ namespace StravaApiTest.Models
             ActivityId = activityId;
             Data = new StreamData();
         }
-
     }
 
     [Serializable]

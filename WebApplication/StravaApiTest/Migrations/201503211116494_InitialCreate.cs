@@ -82,6 +82,39 @@ namespace StravaApiTest.Migrations
                 .PrimaryKey(t => new { t.AthleteId, t.ActivityId, t.StreamType });
             
             CreateTable(
+                "dbo.Bikes",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        Brand = c.String(),
+                        Model = c.String(),
+                        Description = c.String(),
+                        IsPrimary = c.Boolean(nullable: false),
+                        Name = c.String(),
+                        Distance = c.Single(nullable: false),
+                        ResourceState = c.Int(nullable: false),
+                        UserEntity_DatabaseId = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.UserEntities", t => t.UserEntity_DatabaseId)
+                .Index(t => t.UserEntity_DatabaseId);
+            
+            CreateTable(
+                "dbo.Shoes",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        IsPrimary = c.Boolean(nullable: false),
+                        Name = c.String(),
+                        Distance = c.Single(nullable: false),
+                        ResourceState = c.Int(nullable: false),
+                        UserEntity_DatabaseId = c.Int(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.UserEntities", t => t.UserEntity_DatabaseId)
+                .Index(t => t.UserEntity_DatabaseId);
+            
+            CreateTable(
                 "dbo.UserEntities",
                 c => new
                     {
@@ -115,24 +148,6 @@ namespace StravaApiTest.Migrations
                 .PrimaryKey(t => t.DatabaseId);
             
             CreateTable(
-                "dbo.Bikes",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Brand = c.String(),
-                        Model = c.String(),
-                        Description = c.String(),
-                        IsPrimary = c.Boolean(nullable: false),
-                        Name = c.String(),
-                        Distance = c.Single(nullable: false),
-                        ResourceState = c.Int(nullable: false),
-                        UserEntity_DatabaseId = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.UserEntities", t => t.UserEntity_DatabaseId)
-                .Index(t => t.UserEntity_DatabaseId);
-            
-            CreateTable(
                 "dbo.Clubs",
                 c => new
                     {
@@ -153,21 +168,6 @@ namespace StravaApiTest.Migrations
                 .ForeignKey("dbo.UserEntities", t => t.UserEntity_DatabaseId)
                 .Index(t => t.UserEntity_DatabaseId);
             
-            CreateTable(
-                "dbo.Shoes",
-                c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        IsPrimary = c.Boolean(nullable: false),
-                        Name = c.String(),
-                        Distance = c.Single(nullable: false),
-                        ResourceState = c.Int(nullable: false),
-                        UserEntity_DatabaseId = c.Int(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.UserEntities", t => t.UserEntity_DatabaseId)
-                .Index(t => t.UserEntity_DatabaseId);
-            
         }
         
         public override void Down()
@@ -176,14 +176,14 @@ namespace StravaApiTest.Migrations
             DropForeignKey("dbo.Clubs", "UserEntity_DatabaseId", "dbo.UserEntities");
             DropForeignKey("dbo.Bikes", "UserEntity_DatabaseId", "dbo.UserEntities");
             DropForeignKey("dbo.ActivityEntities", "Map_Id", "dbo.Maps");
-            DropIndex("dbo.Shoes", new[] { "UserEntity_DatabaseId" });
             DropIndex("dbo.Clubs", new[] { "UserEntity_DatabaseId" });
+            DropIndex("dbo.Shoes", new[] { "UserEntity_DatabaseId" });
             DropIndex("dbo.Bikes", new[] { "UserEntity_DatabaseId" });
             DropIndex("dbo.ActivityEntities", new[] { "Map_Id" });
-            DropTable("dbo.Shoes");
             DropTable("dbo.Clubs");
-            DropTable("dbo.Bikes");
             DropTable("dbo.UserEntities");
+            DropTable("dbo.Shoes");
+            DropTable("dbo.Bikes");
             DropTable("dbo.StreamEntities");
             DropTable("dbo.Maps");
             DropTable("dbo.ActivityEntities");

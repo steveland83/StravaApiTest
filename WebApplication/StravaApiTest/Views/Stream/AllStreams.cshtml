@@ -1,4 +1,4 @@
-﻿@model List<StravaApiTest.Models.StreamEntity>
+﻿@model StravaApiTest.ViewModels.ActivityStreamsViewModel
 @{
     ViewBag.Title = "All Streams";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,44 +8,7 @@
 
 <div>
     <hr /><br />
-    <table class="table-bordered">
-        <tr>
-            @for (int i = 0; i < Model.Count(); i++)
-            {
-                <th>
-                    @Model[i].StreamType.ToString()
-                </th>
-            }
-        </tr>
 
-        @for (int i = 0; i < Model[0].Data.Data.Count() && i < 501; i++)
-        {
-            if (i == 0 && Model[0].Data.Data.Count() > 500)
-            {
-                <tr>
-                    <td colspan="@Model.Count()" style="background:lightgray; text-align:center; font-weight:bold;">
-                        Streams too large to display - limited to first 500 points.
-                    </td>
-                </tr>
-            }
-            <tr>
-                @if (i < 500)
-                {
-                    for (int j = 0; j < Model.Count(); j++)
-                    {
-                        <td>
-                            @Model[j].Data.Data[i].ToString()
-                        </td>
-                    }
-                }
-                else
-                {
-                    <td colspan="@Model.Count()" style="background:lightgray; text-align:center; font-weight:bold;">
-                        Streams too large to display - limited to first 500 points.                        
-                    </td>
-                }
-                
-            </tr>
-        }
-    </table>
+    @Html.Raw(Model.StreamDataAsHtmlTable)
+    
 </div>

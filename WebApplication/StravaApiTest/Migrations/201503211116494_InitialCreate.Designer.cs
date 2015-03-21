@@ -13,7 +13,7 @@ namespace StravaApiTest.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201503082249322_InitialCreate"; }
+            get { return "201503211116494_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

@@ -10,6 +10,7 @@ using StravaApiTest.DAL;
 using StravaApiTest.Models;
 using com.strava.api.Clients;
 using com.strava.api.Streams;
+using StravaApiTest.ViewModels;
 
 namespace StravaApiTest.Controllers
 {
@@ -41,8 +42,10 @@ namespace StravaApiTest.Controllers
         public ActionResult AllStreams(long athleteId, long activityId)
         {
             var streams = db.ActivityStreams.Where(p => p.ActivityId == activityId).ToList();
-            
-            return View(streams);
+
+            var viewModel = new ActivityStreamsViewModel(streams);
+
+            return View(viewModel);
         }
 
         protected override void Dispose(bool disposing)
