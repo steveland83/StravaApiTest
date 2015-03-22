@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.WebPages.Html;
 
 namespace StravaApiTest.ViewModels
 {
@@ -10,8 +11,12 @@ namespace StravaApiTest.ViewModels
     {
         public string StreamDataAsHtmlTable { get; set; }
 
-        public ActivityStreamsViewModel(List<StreamEntity> streams)
+        public long ActivityId { get; set; }
+
+        public ActivityStreamsViewModel(long activityId, List<StreamEntity> streams)
         {
+            ActivityId = activityId;
+
             var sb = new System.Text.StringBuilder();
 
             sb.Append("<table class='table-bordered'>");
@@ -21,12 +26,12 @@ namespace StravaApiTest.ViewModels
                 var streamLength = streams[0].Data.Data.Count();
                 var tableRows = streamLength;
                 var tableColumns = streams.Count();
-                if (streamLength > 250)
+                if (streamLength > 500)
                 {
-                    tableRows = 250;
+                    tableRows = 500;
                     sb.Append("<tr><td colspan=");
                     sb.Append(streams.Count());
-                    sb.Append(" style='background:lightgray; text-align:center; font-weight:bold;'>Streams too large to display - limited to first 250 points.</td></tr>");
+                    sb.Append(" style='background:lightgray; text-align:center; font-weight:bold;'>Streams too large to display - limited to first 500 points.</td></tr>");
                 }
                 sb.Append("<tr>");
                 for (int j = 0; j < tableColumns; j++)

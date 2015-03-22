@@ -7,6 +7,8 @@
 <h2>All Stream Data</h2>
 
 <div>
+    <hr />
+    @Html.ActionLink("Download as csv", "Export", new { activityId = Model.ActivityId })
     <hr /><br />
 
     @Html.Raw(Model.StreamDataAsHtmlTable)

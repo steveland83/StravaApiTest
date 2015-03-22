@@ -53,6 +53,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assemblies\com.strava.api.dll</HintPath>
     </Reference>
+    <Reference Include="CsvHelper">
+      <HintPath>..\packages\CsvHelper.2.11.1.1\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>

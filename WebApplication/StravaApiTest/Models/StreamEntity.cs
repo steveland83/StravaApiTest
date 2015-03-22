@@ -45,6 +45,7 @@ namespace StravaApiTest.Models
     public class StreamData
     {
         public string SerialisedData { get; private set; }
+        private List<object> _data { get; set; }
         public List<object> Data
         {
             get
@@ -52,7 +53,10 @@ namespace StravaApiTest.Models
                 if (string.IsNullOrEmpty(SerialisedData))
                     return new List<object>();
 
-                return System.Web.Helpers.Json.Decode(SerialisedData, typeof(List<object>));
+                if (_data == null)
+                    _data = System.Web.Helpers.Json.Decode(SerialisedData, typeof(List<object>));
+
+                return _data;
             }
             set
             {

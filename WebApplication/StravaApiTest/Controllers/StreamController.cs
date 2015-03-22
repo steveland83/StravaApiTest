@@ -43,9 +43,33 @@ namespace StravaApiTest.Controllers
         {
             var streams = db.ActivityStreams.Where(p => p.ActivityId == activityId).ToList();
 
-            var viewModel = new ActivityStreamsViewModel(streams);
+            var viewModel = new ActivityStreamsViewModel(activityId, streams);
 
             return View(viewModel);
+        }
+
+        public FileResult Export(long activityId)
+        {
+            var activity = db.Activities.FirstOrDefault(p=>p.Id == activityId);
+
+            if(activity!=null)
+            {
+                var detailedActivity = activity.GetDetailedActivityInfo();
+
+                var filestream = new System.IO.MemoryStream();
+                var writer = new System.IO.StreamWriter(filestream);
+
+                var csvWriter = new CsvHelper.CsvWriter(writer);
+                csvWriter.WriteExcelSeparator();
+                csvWriter.WriteRecords(detailedActivity.ActivityDataPoints);
+                
+                string fileName = string.Format("{0}_{1}.csv", detailedActivity.DateTimeStart, detailedActivity.Name);
+
+                var file = File(filestream.ToArray(), "text/csv", fileName);
+                
+                return file;
+            }
+            return null;
         }
 
         protected override void Dispose(bool disposing)
