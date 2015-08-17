@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script>
+    var activityId = @Model;
+</script>
+
+<div ng-controller="graphingController">
+    <linechart data="data" options="options" mode="" width="" height=""></linechart>
+</div>

@@ -4,13 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        @Styles.Render("~/Content/css")
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        <script src="~/Scripts/angular.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+        @*@Scripts.Render("~/bundles/modernizr")*@
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+        <script src="~/AngularAppScripts/App.js"></script>
     <script>
             $(function () {
                 $("#accordion").accordion({
@@ -21,7 +24,7 @@
     </script>
 
 </head>
-<body>
+<body ng-app="AngularApp">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -36,7 +39,7 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Link my Strava", "GetAuthWebServiceCode", "Home")</li>
                     <li>@Html.ActionLink("Linked Athletes", "Index", "Athlete")</li>
-                </ul>                
+                </ul>
             </div>
         </div>
     </div>
@@ -48,6 +51,6 @@
         </footer>
     </div>
 
-    
+
 </body>
 </html>

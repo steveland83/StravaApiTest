@@ -1,4 +1,5 @@
-﻿using StravaApiTest.Models;
+﻿using com.strava.api.Streams;
+using StravaApiTest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +12,23 @@ namespace StravaApiTest.ViewModels
     {
         public string StreamDataAsHtmlTable { get; set; }
 
+        public string TimeData { get; set; }
+        public string PaceData { get; set; }
+        public string TargetPaceData { get; set; }
+
         public long ActivityId { get; set; }
 
         public ActivityStreamsViewModel(long activityId, List<StreamEntity> streams)
         {
             ActivityId = activityId;
-
+            var rand = new Random();
             var sb = new System.Text.StringBuilder();
+            var sbTime = new System.Text.StringBuilder();
+            var sbPace = new System.Text.StringBuilder();
+            var sbTargetPace = new System.Text.StringBuilder();
 
             sb.Append("<table class='table-bordered'>");
-
+            
             if (streams.Count() > 0)
             {
                 var streamLength = streams[0].Data.Data.Count();
@@ -45,7 +53,7 @@ namespace StravaApiTest.ViewModels
                     for (int j = 0; j < tableColumns; j++)
                     {
                         sb.Append(string.Format("<td>{0}</td>", streams[j].Data.Data[i]));
-                    }
+                    }                    
                     sb.Append("</tr>");
                 }
             }
@@ -60,6 +68,23 @@ namespace StravaApiTest.ViewModels
             sb.Append("</table>");
 
             StreamDataAsHtmlTable = sb.ToString();
+
+            TimeData = sbTime.ToString();
+            PaceData = sbPace.ToString();
+            TargetPaceData = sbTargetPace.ToString();
+
+            if (TimeData.Length > 2)
+            {
+                TimeData = TimeData.Remove(TimeData.Length - 2);
+            }
+            if (PaceData.Length > 2)
+            {
+                PaceData = PaceData.Remove(PaceData.Length - 2);
+            }
+            if (TargetPaceData.Length > 2)
+            {
+                TargetPaceData = TargetPaceData.Remove(TargetPaceData.Length - 2);
+            }
         }
     }
 }

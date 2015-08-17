@@ -11,6 +11,7 @@ using StravaApiTest.Models;
 using com.strava.api.Clients;
 using com.strava.api.Streams;
 using StravaApiTest.ViewModels;
+using System.Web.Script.Serialization;
 
 namespace StravaApiTest.Controllers
 {
@@ -72,6 +73,64 @@ namespace StravaApiTest.Controllers
             return null;
         }
 
+        private class GraphDataPoint
+        {
+            public string x { get; set; }
+            public object y { get; set; }
+            public object z { get; set; }
+            public object r { get; set; }
+        }
+
+        private string TimeFormatter(double timeInSeconds)
+        {
+            var hours = Math.Floor(timeInSeconds / 3600);
+            var minutes = Math.Floor((timeInSeconds - (hours * 3600)) / 60);
+            var seconds = timeInSeconds - (hours * 3600) - (minutes * 60);
+
+            var formattedTime = string.Format("{0:00}-{1:00}-{2:00}", hours, minutes, seconds);
+            return formattedTime;
+        }
+
+        public string StreamGraphData(long activityId)
+        {
+            if (activityId == 0)
+            {
+                return null;
+            }
+            
+            var timeStream = db.ActivityStreams.Where(p => p.ActivityId == activityId && p.StreamType == StreamType.Time).FirstOrDefault();
+            var hrStream = db.ActivityStreams.Where(p => p.ActivityId == activityId && p.StreamType == StreamType.Heartrate).FirstOrDefault();
+            var paceStream = db.ActivityStreams.Where(p => p.ActivityId == activityId && p.StreamType == StreamType.Velocity_Smooth).FirstOrDefault();
+            var altitudeStream = db.ActivityStreams.Where(p => p.ActivityId == activityId && p.StreamType == StreamType.Altitude).FirstOrDefault();
+
+            var points = new List<GraphDataPoint>();
+            for (int i = 0; i < timeStream.Data.Data.Count; i++)
+            {
+                if (i < 3000 /*&& i % 2 == 0*/)
+                {
+                    if(hrStream!=null)
+                        points.Add(new GraphDataPoint() { x = TimeFormatter(timeStream.Data.Data[i]), y = hrStream.Data.Data[i], z = PacePerKm(paceStream.Data.Data[i]), r = altitudeStream.Data.Data[i] });
+                    else
+                        points.Add(new GraphDataPoint() { x = TimeFormatter(timeStream.Data.Data[i]), y = 0, z = PacePerKm(paceStream.Data.Data[i]), r = altitudeStream.Data.Data[i] });
+                }
+            }
+
+            var jsSerializer = new JavaScriptSerializer();
+            string json = jsSerializer.Serialize(points);
+            return json;
+        }
+
+        private object PacePerKm(double metersPerSecond)
+        {
+            if(metersPerSecond>0)
+            {
+                double secondsPerKm = 1000 / (metersPerSecond);
+                return Math.Floor(secondsPerKm);
+            }
+
+            return 3600;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -80,5 +139,7 @@ namespace StravaApiTest.Controllers
             }
             base.Dispose(disposing);
         }
+
+
     }
 }

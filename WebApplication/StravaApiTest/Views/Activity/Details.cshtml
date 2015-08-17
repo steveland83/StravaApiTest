@@ -12,6 +12,9 @@
         @Html.ActionLink("Back to List", "Index", new { athleteId = Model.AthleteId })
     </p>
     <hr />
+
+    @Html.Action("LoadActivityGraph", "Activity", Model.Id)
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Name)

@@ -11,6 +11,7 @@ using StravaApiTest.Models;
 using com.strava.api.Activities;
 using com.strava.api.Clients;
 using com.strava.api.Streams;
+using StravaApiTest.ViewModels;
 
 namespace StravaApiTest.Controllers
 {
@@ -59,6 +60,15 @@ namespace StravaApiTest.Controllers
             }
             var activity = db.Activities.Where(p => p.Id == activityId).FirstOrDefault();
             return View(activity);
+        }
+
+        public PartialViewResult LoadActivityGraph(long activityId)
+        {
+            //var streams = db.ActivityStreams.Where(p => p.ActivityId == activityId).ToList();
+
+            //var viewModel = new StreamGraphViewModel(activityId, streams);
+
+            return PartialView("ActivityGraph2", activityId);
         }
 
         protected override void Dispose(bool disposing)
