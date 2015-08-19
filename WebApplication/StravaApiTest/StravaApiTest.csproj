@@ -24,6 +24,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -226,9 +227,7 @@
     <Content Include="Images\ConnectWithStrava.png" />
     <Content Include="Scripts\ActivityGraphing.js" />
     <Content Include="Scripts\amcharts\amcharts.js" />
-    <Content Include="Scripts\amcharts\funnel.js" />
-    <Content Include="Scripts\amcharts\gantt.js" />
-    <Content Include="Scripts\amcharts\gauge.js" />
+    <Content Include="Scripts\amcharts\amstock.js" />
     <Content Include="Scripts\amcharts\images\dragIcon.gif" />
     <Content Include="Scripts\amcharts\images\dragIconBlack.gif" />
     <Content Include="Scripts\amcharts\images\dragIconH.gif" />
@@ -249,12 +248,24 @@
     <Content Include="Scripts\amcharts\images\dragIconRoundSmallBlack.png" />
     <Content Include="Scripts\amcharts\images\dragIconRoundSmallBlackH.png" />
     <Content Include="Scripts\amcharts\images\dragIconRoundSmallH.png" />
+    <Content Include="Scripts\amcharts\images\eraserIcon.gif" />
+    <Content Include="Scripts\amcharts\images\eraserIcon.png" />
+    <Content Include="Scripts\amcharts\images\eraserIconH.gif" />
+    <Content Include="Scripts\amcharts\images\eraserIconH.png" />
     <Content Include="Scripts\amcharts\images\export.png" />
     <Content Include="Scripts\amcharts\images\exportWhite.png" />
     <Content Include="Scripts\amcharts\images\lens.png" />
     <Content Include="Scripts\amcharts\images\lensWhite.png" />
     <Content Include="Scripts\amcharts\images\lensWhite_old.png" />
     <Content Include="Scripts\amcharts\images\lens_old.png" />
+    <Content Include="Scripts\amcharts\images\pencilIcon.gif" />
+    <Content Include="Scripts\amcharts\images\pencilIcon.png" />
+    <Content Include="Scripts\amcharts\images\pencilIconH.gif" />
+    <Content Include="Scripts\amcharts\images\pencilIconH.png" />
+    <Content Include="Scripts\amcharts\images\xIcon.gif" />
+    <Content Include="Scripts\amcharts\images\xIcon.png" />
+    <Content Include="Scripts\amcharts\images\xIconH.gif" />
+    <Content Include="Scripts\amcharts\images\xIconH.png" />
     <Content Include="Scripts\amcharts\lang\az.js" />
     <Content Include="Scripts\amcharts\lang\bg.js" />
     <Content Include="Scripts\amcharts\lang\de.js" />
@@ -332,9 +343,9 @@
     <Content Include="Scripts\amcharts\patterns\white\pattern7.png" />
     <Content Include="Scripts\amcharts\patterns\white\pattern8.png" />
     <Content Include="Scripts\amcharts\patterns\white\pattern9.png" />
-    <Content Include="Scripts\amcharts\pie.js" />
     <Content Include="Scripts\amcharts\plugins\dataloader\dataloader.js" />
     <Content Include="Scripts\amcharts\plugins\dataloader\dataloader.min.js" />
+    <Content Include="Scripts\amcharts\plugins\dataloader\examples\gauge_json.html" />
     <Content Include="Scripts\amcharts\plugins\dataloader\examples\map_json.html" />
     <Content Include="Scripts\amcharts\plugins\dataloader\examples\pie_csv.html" />
     <Content Include="Scripts\amcharts\plugins\dataloader\examples\pie_json.html" />
@@ -384,6 +395,37 @@
     <Content Include="Scripts\amcharts\plugins\export\libs\pdfmake\vfs_fonts.js" />
     <Content Include="Scripts\amcharts\plugins\export\libs\xlsx\xlsx.js" />
     <Content Include="Scripts\amcharts\plugins\export\libs\xlsx\xlsx.min.js" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\1.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\10.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\11.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\12.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\13.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\14.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\15.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\16.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\17.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\18.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\19.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\2.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\20.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\21.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\22.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\23.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\24.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\25.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\26.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\27.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\28.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\29.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\3.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\30.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\31.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\4.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\5.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\6.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\7.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\8.svg" />
+    <Content Include="Scripts\amcharts\plugins\export\shapes\9.svg" />
     <Content Include="Scripts\amcharts\plugins\responsive\examples\funnel.html" />
     <Content Include="Scripts\amcharts\plugins\responsive\examples\gantt.html" />
     <Content Include="Scripts\amcharts\plugins\responsive\examples\gauge.html" />
@@ -404,14 +446,13 @@
     <Content Include="Scripts\amcharts\plugins\responsive\license.txt" />
     <Content Include="Scripts\amcharts\plugins\responsive\responsive.js" />
     <Content Include="Scripts\amcharts\plugins\responsive\responsive.min.js" />
-    <Content Include="Scripts\amcharts\radar.js" />
     <Content Include="Scripts\amcharts\serial.js" />
+    <Content Include="Scripts\amcharts\style.css" />
     <Content Include="Scripts\amcharts\themes\black.js" />
     <Content Include="Scripts\amcharts\themes\chalk.js" />
     <Content Include="Scripts\amcharts\themes\dark.js" />
     <Content Include="Scripts\amcharts\themes\light.js" />
     <Content Include="Scripts\amcharts\themes\patterns.js" />
-    <Content Include="Scripts\amcharts\xy.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -453,6 +494,7 @@
     <Content Include="Scripts\angular-aria.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\amcharts\plugins\dataloader\examples\data\gauge.json" />
     <Content Include="Scripts\amcharts\plugins\dataloader\examples\data\map.json" />
     <Content Include="Scripts\amcharts\plugins\dataloader\examples\data\MSFT.csv" />
     <Content Include="Scripts\amcharts\plugins\dataloader\examples\data\MSFT_events.csv" />
@@ -463,9 +505,7 @@
     <Content Include="Scripts\amcharts\plugins\dataloader\examples\data\serial2.json" />
     <Content Include="Scripts\amcharts\plugins\dataloader\examples\data\TXN.csv" />
     <Content Include="Scripts\amcharts\plugins\dataloader\readme.md" />
-    <Content Include="Scripts\amcharts\plugins\export\libs\fabric.js\.travis.yml" />
     <Content Include="Scripts\amcharts\plugins\export\libs\pdfmake\pdfmake.min.js.map" />
-    <Content Include="Scripts\amcharts\plugins\export\libs\pdfmake\pdfmake.min.map" />
     <Content Include="Scripts\amcharts\plugins\export\libs\xlsx\LICENSE" />
     <Content Include="Scripts\amcharts\plugins\export\libs\xlsx\xlsx.min.map" />
     <Content Include="Scripts\amcharts\plugins\export\LICENSE" />

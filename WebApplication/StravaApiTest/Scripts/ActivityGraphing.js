@@ -33,18 +33,25 @@ function paceFormatter(valueText, date, valueAxis)
 
 AmCharts.ready(function () {
     // SERIAL CHART    
+    DrawChart(true, true, true, true);
+});
+
+function DrawChart(showHR, showPace, showAltitude, showHRBands)
+{
     chart = new AmCharts.AmSerialChart();
     //chart.pathToImages = "http://www.amcharts.com/lib/images/";
     chart.marginTop = 0;
     chart.marginRight = 10;
     chart.autoMarginOffset = 5;
+    chart.mouseWheelZoomEnabled = true;
+    chart.wheel
     chart.zoomOutButton = {
         backgroundColor: '#000000',
         backgroundAlpha: 0.15
     };
     chart.dataDateFormat = "JJ-NN-SS";
     chart.categoryField = "x";
-        
+
     // AXES
     // category
     var categoryAxis = chart.categoryAxis;
@@ -53,7 +60,7 @@ AmCharts.ready(function () {
     categoryAxis.dashLength = 1;
     categoryAxis.gridAlpha = 0.15;
     categoryAxis.gridColor = 'ffffff';
-    categoryAxis.axisColor = "#DADADA";    
+    categoryAxis.axisColor = "#DADADA";
 
     // value                
     var valueAxisHR = new AmCharts.ValueAxis();
@@ -62,6 +69,9 @@ AmCharts.ready(function () {
     valueAxisHR.maximum = 250;
     valueAxisHR.minimum = 30;
     valueAxisHR.gridColor = 'ffffff';
+    valueAxisHR.showFirstLabel = false;
+    valueAxisHR.showLastLabel = false;
+    valueAxisHR.visible = showHR;
     chart.addValueAxis(valueAxisHR);
 
     var valueAxisPace = new AmCharts.ValueAxis();
@@ -69,17 +79,20 @@ AmCharts.ready(function () {
     valueAxisPace.position = "right"
     valueAxisPace.duration = "ss";
     valueAxisPace.title = "Pace";
-    valueAxisPace.offset = 55;
+    valueAxisPace.offset = 60;
     valueAxisPace.gridColor = 'ffffff';
     valueAxisPace.minimum = 1800;
     valueAxisPace.maximum = 0;
     valueAxisPace.unit = "/km";
+    valueAxisPace.showFirstLabel = false;
+    valueAxisPace.showLastLabel = false;
+    valueAxisPace.visible = showPace;
     chart.addValueAxis(valueAxisPace);
 
     var valueAxisAlt = new AmCharts.ValueAxis();
     valueAxisAlt.title = "Altitude";
     valueAxisAlt.gridCount = 0;
-    //valueAxisAlt.visible = false;
+    valueAxisAlt.visible = showAltitude;
     chart.addValueAxis(valueAxisAlt);
 
     // HEART RATE
@@ -93,7 +106,8 @@ AmCharts.ready(function () {
     graphHR.lineThickness = 2;
     graphHR.lineColor = "#b5030d";
     graphHR.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
-    chart.addGraph(graphHR);
+    if(showHR)
+        chart.addGraph(graphHR);
 
     //PACE
     var graphPace = new AmCharts.AmGraph();
@@ -104,9 +118,10 @@ AmCharts.ready(function () {
     graphPace.bulletBorderColor = "#FFFFFF";
     graphPace.bulletBorderThickness = 2;
     graphPace.lineThickness = 2;
-    graphPace.lineColor = "#1010cc";    
+    graphPace.lineColor = "#1010cc";
     graphPace.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
-    chart.addGraph(graphPace);
+    if(showPace)
+        chart.addGraph(graphPace);
 
     //ALTITUDE
     var graphAlt = new AmCharts.AmGraph();
@@ -117,43 +132,44 @@ AmCharts.ready(function () {
     graphAlt.bulletBorderColor = "#FFFFFF";
     graphAlt.bulletBorderThickness = 2;
     graphAlt.lineThickness = 2;
-    graphAlt.lineColor = "#10cc10";
-    graphAlt.fillAlphas = 0.6;
+    graphAlt.lineColor = "#cccccc";
+    graphAlt.fillAlphas = 0.2;
     graphAlt.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
-    chart.addGraph(graphAlt);
+    if(showAltitude)
+        chart.addGraph(graphAlt);
 
     // red HR guide
     var guide1 = new AmCharts.Guide();
     guide1.value = 100;
     guide1.toValue = 190;
-    //guide1.fillColor = "#CC0000";
-    //guide1.fillAlpha = 0.2;
+    guide1.fillColor = "#CC0000";
+    guide1.fillAlpha = 0.2;
     guide1.dashLength = 2;
     guide1.inside = true;
     guide1.labelRotation = 90;
     guide1.label = "High HR";
+    guide1.visible = showHRBands;
     valueAxisHR.addGuide(guide1);
-    
+
     // CURSOR
     chartCursor = new AmCharts.ChartCursor();
     chartCursor.cursorPosition = "mouse";
     chartCursor.categoryBalloonDateFormat = "JJ:NN:SS";
-    chartCursor.categoryBalloonEnabled = true; 
+    chartCursor.categoryBalloonEnabled = true;
     chart.addChartCursor(chartCursor);
 
     // SCROLLBAR
     var chartScrollbar = new AmCharts.ChartScrollbar();
     chartScrollbar.graph = graphAlt;
-    chartScrollbar.scrollbarHeight = 40;
+    chartScrollbar.scrollbarHeight = 20;
     chartScrollbar.color = "#FFFFFF";
     chartScrollbar.autoGridCount = true;
     chart.addChartScrollbar(chartScrollbar);
 
     // WRITE
-    chart.write("chartdiv");    
-});
-
-
+    chart.validateNow();
+    chart.write("chartdiv");
+}
 
 function BuildGraphForActivity(activityId) {
     $.ajax({
