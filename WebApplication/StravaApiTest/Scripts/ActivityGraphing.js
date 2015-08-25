@@ -176,7 +176,18 @@ function DrawChart()
 
     // SCROLLBAR
     var chartScrollbar = new AmCharts.ChartScrollbar();
-    chartScrollbar.graph = graphAlt;
+    if (ShowAltitude) {
+        chartScrollbar.graph = graphAlt;
+    }
+    else {
+        if(ShowPace)
+        {
+            chartScrollbar.graph = graphPace;
+        }
+        else {
+            chartScrollbar.graph = graphHR;
+        }
+    }
     chartScrollbar.scrollbarHeight = 20;
     chartScrollbar.color = "#FFFFFF";
     chartScrollbar.autoGridCount = true;
