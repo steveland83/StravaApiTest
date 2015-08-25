@@ -24,26 +24,66 @@
 
     <script>
 
-    BuildGraphForActivity(@Model.Id);
-
+        var activityId = @Model.Id;    
+        
+        BuildGraphForActivity(activityId);
         function RedrawChart()
         {
-            DrawChart(true, true, true, false);
+            var hrGuideFrom = 0;
+            var hrGuideTo = 0;
+            if(ddlHRGuide.value == 'recovery')
+            {
+                hrGuideFrom = 0;
+                hrGuideTo = 139;
+            }
+            if(ddlHRGuide.value == 'easy')
+            {
+                hrGuideFrom = 140;
+                hrGuideTo = 160;
+            }
+            if(ddlHRGuide.value == 'tempo')
+            {
+                hrGuideFrom = 160;
+                hrGuideTo = 170;
+            }
+            if(ddlHRGuide.value == 'threshold')
+            {
+                hrGuideFrom = 170;
+                hrGuideTo = 175;
+            }
+            if(ddlHRGuide.value == 'vo2')
+            {
+                hrGuideFrom = 175;
+                hrGuideTo = 180;
+            }
+            if(ddlHRGuide.value == 'anaerobic')
+            {
+                hrGuideFrom = 180;
+                hrGuideTo = 220;
+            }
+            ReDrawGraph(chkHR.checked, chkPace.checked, chkAltitude.checked, hrGuideFrom, hrGuideTo);            
         }
 
     </script>
     <div>
         <div id="chartdiv" style="width: 100%; height: 400px;"></div>
     </div>
-
-
+    
     <ul>
-        <li style="display:inline; padding:10px;"><input type="checkbox" value="Altitude" onclick="RedrawChart()" />&nbsp;Altitude</li>
-        <li style="display:inline; padding:10px;"><input type="checkbox" value="Pace" />&nbsp;Pace</li>
-        <li style="display:inline; padding:10px;"><input type="checkbox" value="HR" />&nbsp;HR</li>
-        <li style="display:inline; padding:10px;"><input type="checkbox" value="HRGuide" />&nbsp;HR Guide</li>
+        <li style="display:inline; padding:10px;"><input id="chkAltitude" type="checkbox" value="Altitude" checked="checked" onchange="RedrawChart()" />&nbsp;Altitude</li>
+        <li style="display:inline; padding:10px;"><input id="chkPace" type="checkbox" value="Pace" checked="checked" onchange="RedrawChart()"/>&nbsp;Pace</li>
+        <li style="display:inline; padding:10px;"><input id="chkHR" type="checkbox" value="HR" checked="checked" onchange="RedrawChart()"/>&nbsp;HR</li>        
     </ul>
-
+    HR Guide&nbsp;
+    <select id="ddlHRGuide" onchange="RedrawChart()">
+        <option value="none">None</option>
+        <option value="recovery">Recovery</option>
+        <option value="easy">Easy</option>
+        <option value="tempo">Tempo</option>
+        <option value="threshold">Threshold</option>
+        <option value="vo2">VO2 Max</option>
+        <option value="anaerobic">Anaerobic</option>
+    </select>
 
     <dl class="dl-horizontal">
         <dt>

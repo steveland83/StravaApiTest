@@ -2,11 +2,28 @@
 
 var chart;
 var chartCursor;
-
+var chartData;
+var ShowHR = true;
+var ShowPace = true;
+var ShowAltitude = true;
+var HRTargetFromValue = 0;
+var HRTargetToValue = 0;
 
 function GraphData(data) {
+    DrawChart();
+    chartData = data;
     chart.dataProvider = JSON.parse(data);
     chart.validateData();
+}
+
+function ReDrawGraph(showHR, showPace, showAltitude, hrTargetFromValue, hrTargetToValue)
+{
+    ShowHR = showHR;
+    ShowPace = showPace;
+    ShowAltitude = showAltitude;
+    HRTargetFromValue = hrTargetFromValue;
+    HRTargetToValue = hrTargetToValue;
+    GraphData(chartData);
 }
 
 function timeFormatter(timeInSeconds) {
@@ -31,12 +48,12 @@ function paceFormatter(valueText, date, valueAxis)
     return 'hello';
 }
 
-AmCharts.ready(function () {
-    // SERIAL CHART    
-    DrawChart(true, true, true, true);
-});
+//AmCharts.ready(function () {
+//    // SERIAL CHART    
+//    DrawChart(true, true, true, true);
+//});
 
-function DrawChart(showHR, showPace, showAltitude, showHRBands)
+function DrawChart()
 {
     chart = new AmCharts.AmSerialChart();
     //chart.pathToImages = "http://www.amcharts.com/lib/images/";
@@ -44,7 +61,6 @@ function DrawChart(showHR, showPace, showAltitude, showHRBands)
     chart.marginRight = 10;
     chart.autoMarginOffset = 5;
     chart.mouseWheelZoomEnabled = true;
-    chart.wheel
     chart.zoomOutButton = {
         backgroundColor: '#000000',
         backgroundAlpha: 0.15
@@ -71,7 +87,7 @@ function DrawChart(showHR, showPace, showAltitude, showHRBands)
     valueAxisHR.gridColor = 'ffffff';
     valueAxisHR.showFirstLabel = false;
     valueAxisHR.showLastLabel = false;
-    valueAxisHR.visible = showHR;
+    valueAxisHR.visible = ShowHR;
     chart.addValueAxis(valueAxisHR);
 
     var valueAxisPace = new AmCharts.ValueAxis();
@@ -86,13 +102,13 @@ function DrawChart(showHR, showPace, showAltitude, showHRBands)
     valueAxisPace.unit = "/km";
     valueAxisPace.showFirstLabel = false;
     valueAxisPace.showLastLabel = false;
-    valueAxisPace.visible = showPace;
+    valueAxisPace.visible = ShowPace;
     chart.addValueAxis(valueAxisPace);
 
     var valueAxisAlt = new AmCharts.ValueAxis();
     valueAxisAlt.title = "Altitude";
     valueAxisAlt.gridCount = 0;
-    valueAxisAlt.visible = showAltitude;
+    valueAxisAlt.visible = ShowAltitude;
     chart.addValueAxis(valueAxisAlt);
 
     // HEART RATE
@@ -106,7 +122,7 @@ function DrawChart(showHR, showPace, showAltitude, showHRBands)
     graphHR.lineThickness = 2;
     graphHR.lineColor = "#b5030d";
     graphHR.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
-    if(showHR)
+    if(ShowHR)
         chart.addGraph(graphHR);
 
     //PACE
@@ -120,7 +136,7 @@ function DrawChart(showHR, showPace, showAltitude, showHRBands)
     graphPace.lineThickness = 2;
     graphPace.lineColor = "#1010cc";
     graphPace.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
-    if(showPace)
+    if(ShowPace)
         chart.addGraph(graphPace);
 
     //ALTITUDE
@@ -135,21 +151,21 @@ function DrawChart(showHR, showPace, showAltitude, showHRBands)
     graphAlt.lineColor = "#cccccc";
     graphAlt.fillAlphas = 0.2;
     graphAlt.hideBulletsCount = 50; // this makes the chart to hide bullets when there are more than 50 series in selection
-    if(showAltitude)
+    if(ShowAltitude)
         chart.addGraph(graphAlt);
 
     // red HR guide
     var guide1 = new AmCharts.Guide();
-    guide1.value = 100;
-    guide1.toValue = 190;
-    guide1.fillColor = "#CC0000";
+    guide1.value = HRTargetFromValue;
+    guide1.toValue = HRTargetToValue;
+    guide1.fillColor = "#DD1111";
     guide1.fillAlpha = 0.2;
     guide1.dashLength = 2;
     guide1.inside = true;
     guide1.labelRotation = 90;
-    guide1.label = "High HR";
-    guide1.visible = showHRBands;
-    valueAxisHR.addGuide(guide1);
+    guide1.label = "Target HR";
+    if (HRTargetToValue>0)
+        valueAxisHR.addGuide(guide1);
 
     // CURSOR
     chartCursor = new AmCharts.ChartCursor();
