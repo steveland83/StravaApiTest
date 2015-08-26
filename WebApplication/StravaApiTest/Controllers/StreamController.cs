@@ -103,15 +103,33 @@ namespace StravaApiTest.Controllers
             var paceStream = db.ActivityStreams.Where(p => p.ActivityId == activityId && p.StreamType == StreamType.Velocity_Smooth).FirstOrDefault();
             var altitudeStream = db.ActivityStreams.Where(p => p.ActivityId == activityId && p.StreamType == StreamType.Altitude).FirstOrDefault();
 
+            var smoothingPoints = 5;
+            var totalPoints = timeStream.Data.Data.Count;
             var points = new List<GraphDataPoint>();
-            for (int i = 0; i < timeStream.Data.Data.Count; i++)
+            for (int i = 0; i < totalPoints; i++)
             {
                 if (i < 3000 /*&& i % 2 == 0*/)
                 {
-                    if(hrStream!=null)
-                        points.Add(new GraphDataPoint() { x = TimeFormatter(timeStream.Data.Data[i]), y = hrStream.Data.Data[i], z = PacePerKm(paceStream.Data.Data[i]), r = altitudeStream.Data.Data[i] });
+                    double smoothedPace = 0;
+                    /*Velocity Smoothing*/
+                    if (i > smoothingPoints && i < totalPoints - smoothingPoints - 1)
+                    {
+                        for (int x = i - smoothingPoints; x < i + smoothingPoints; x++)
+                        {
+                            smoothedPace += paceStream.Data.Data[x];
+                        }
+                        smoothedPace = smoothedPace / (smoothingPoints * 2 + 1);
+                    }
                     else
-                        points.Add(new GraphDataPoint() { x = TimeFormatter(timeStream.Data.Data[i]), y = 0, z = PacePerKm(paceStream.Data.Data[i]), r = altitudeStream.Data.Data[i] });
+                    {
+                        smoothedPace = paceStream.Data.Data[i];
+                    }
+                    /*End Smoothing*/
+
+                    if(hrStream!=null)
+                        points.Add(new GraphDataPoint() { x = TimeFormatter(timeStream.Data.Data[i]), y = hrStream.Data.Data[i], z = PacePerKm(smoothedPace), r = altitudeStream.Data.Data[i] });
+                    else
+                        points.Add(new GraphDataPoint() { x = TimeFormatter(timeStream.Data.Data[i]), y = 0, z = PacePerKm(smoothedPace), r = altitudeStream.Data.Data[i] });
                 }
             }
 
