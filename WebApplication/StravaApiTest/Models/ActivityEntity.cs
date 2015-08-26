@@ -48,6 +48,10 @@ namespace StravaApiTest.Models
                         for (var i = 0; i < NumDataPoints; i++)
                             ActivityDataPoints[i].altitude = double.Parse(stream.Data.Data[i].ToString());
                         break;
+                    case StreamType.Velocity_Smooth:
+                        for (var i = 0; i < NumDataPoints; i++)
+                            ActivityDataPoints[i].velocity_smooth = double.Parse(stream.Data.Data[i].ToString());
+                        break;
                     case StreamType.Cadence:
                         for (var i = 0; i < NumDataPoints; i++)
                             ActivityDataPoints[i].cadence = int.Parse(stream.Data.Data[i].ToString());
@@ -70,7 +74,7 @@ namespace StravaApiTest.Models
                         break;
                     case StreamType.Moving:
                         for (var i = 0; i < NumDataPoints; i++)
-                            ActivityDataPoints[i].moving = bool.Parse(stream.Data.Data[i].ToString());
+                            ActivityDataPoints[i].moving = stream.Data.Data[i] == 1;
                         break;
                     case StreamType.Temperature:
                         for (var i = 0; i < NumDataPoints; i++)
